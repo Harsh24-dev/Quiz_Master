@@ -1,0 +1,42 @@
+{%extends "student_layout.html"%}
+{%block content%}
+<div class="container">
+    <div class="text-center">
+        <h3>Score Dashboard</h3>
+        <p>View your performance for each quiz you attempted.</p>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Quiz ID</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>Total Questions</th>
+                <th>Total Score</th>
+                <th>Your Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if scores %}
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.q_id }}</td>
+                    <td>{{ score.quiz.chapter.subject.sname }}</td>
+                    <td>{{ score.quiz.chapter.cname }}</td>
+                    <td>{{ score.quiz.questions|length }}</td>
+                    <td>{{ score.quiz.questions|length }}</td>
+                    <td>{{ score.total_score }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">No scores available yet. Try taking a quiz!</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="{{ url_for('student_dashboard', name=name) }}" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</div>
+{%endblock%}

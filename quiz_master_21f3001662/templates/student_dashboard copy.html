@@ -1,0 +1,46 @@
+{%extends "student_layout.html"%}
+{%block content%}
+<div class="container">
+    <h3 class="text-center">Available Quizzes</h3>
+    <p class="text-center">Ready to test your knowledge? Choose a quiz and start your challenge.</p>
+    {% if subjects %}
+    {% for subject in subjects %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{ subject.sname }}</h5>
+            <div class="card-body">
+                {% if quizzes %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Quiz ID</th>
+                            <th>Chapter Name</th>
+                            <th>Deadline</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for chapter in subject.chapters%}
+                        {% for quiz in chapter.quizzes%}
+                        <tr>
+                            <td>{{ quiz.q_id }}</td>
+                            <td>{{ chapter.cname}}</td>
+                            <td>{{ quiz.q_deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td><a href="/take_quiz/{{quiz.q_id}}/{{name}}" class="btn btn-primary">Take Quiz</a></td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-center">No quizzes available for this subject.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {%else%}
+    <p class="text-center">No subjects or quizzes available at the moment.</p>
+    {% endif %}
+</div>
+{%endblock%}

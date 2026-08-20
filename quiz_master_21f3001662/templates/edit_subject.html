@@ -1,0 +1,25 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Edit Subject Information</h3></div>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="s_id" class="form-label">Subject ID</label>
+            <input type="number" class="form-control" id="s_id" name="s_id" placeholder="You cannot edit this" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="sname" class="form-label">Subject Name</label>
+            <input type="text" class="form-control" id="sname" name="sname" placeholder="{{ subject.sname}}">
+        </div>
+        <div class="mb-3">
+            <label for="s_description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="s_description" name="s_description" placeholder="{{ subject.s_description}}">
+        </div>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/delete_subject/{{subject.s_id}}/{{name}}" type = "button" class ="btn btn-danger">Delete</a>
+            <a href="/admin/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}

@@ -1,0 +1,25 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Edit Quiz Information</h3></div>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="q_id" class="form-label">Quiz ID</label>
+            <input type="number" class="form-control" id="q_id" name="q_id" placeholder="You cannot edit this." disabled>
+        </div>
+        <div class="mb-3">
+            <label for="c_id" class="form-label">Chapter ID</label>
+            <input type="number" class="form-control" id="c_id" name="c_id" placeholder="You cannot edit this." disabled>
+        </div>
+        <div class="mb-3">
+            <label for="q_deadline" class="form-label">Quiz Deadline</label>
+            <input type="datetime-local" class="form-control" id="q_deadline" name="q_deadline" placeholder="{{ quiz.q_deadline }}">
+        </div>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/delete_quiz/{{ quiz.q_id }}/{{name}}" type = "button" class ="btn btn-danger">Delete</a>
+            <a href="/quiz/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}

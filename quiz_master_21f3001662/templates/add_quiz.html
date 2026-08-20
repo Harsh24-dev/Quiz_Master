@@ -1,0 +1,25 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Add New Quiz</h3></div>
+<p class="text-center">Hi, here you can add Quiz</p>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="q_id" class="form-label">Quiz ID</label>
+            <input type="number" class="form-control" id="q_id" name="q_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="c_id" class="form-label">Chapter ID</label>
+            <input type="number" class="form-control" id="c_id" name="c_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="q_deadline" class="form-label">Quiz Deadline</label>
+            <input type="datetime-local" class="form-control" id="q_deadline" name="q_deadline" placeholder="Last Date of Quiz">
+        </div>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Add Quiz</button>
+            <a href="/quiz/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}

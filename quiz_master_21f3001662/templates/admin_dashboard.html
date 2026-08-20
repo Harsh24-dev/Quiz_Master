@@ -1,0 +1,174 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if query %}
+            <h3 class="text-center">Search Result for "{{ query }}"</h3>
+
+            {% if users %}
+            <table class = "table table-bordered">
+                <h4>Users</h4>
+                <thead>
+                    <tr>
+                        <th>Username ID</th>
+                        <th>Full Name</th>
+                        <th>Qualification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.qualification }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+            {% if subjects %}
+                <h4>Subjects</h4>
+                <div class="row">
+                    {% for subject in subjects %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">
+                                        <a href="/edit_subject/{{ subject.s_id }}/{{ name }}">{{ subject.sname }}</a>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Chapter Name</th>
+                                                <th>Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for chapter in subject.chapters %}
+                                                {% if chapter.s_id == subject.s_id %}
+                                                <tr>
+                                                    <td>{{ chapter.cname }}</td>
+                                                    <td>{{ chapter.c_description }}</td>
+                                                    <td><a href="/edit_chapter/{{ chapter.c_id }}/{{ name }}" class="btn btn-outline-primary btn-sm">Edit</a></td>
+                                                </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a href="/chapter/{{ subject.s_id }}/{{ name }}" class="btn btn-outline-primary">Add Chapter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if chapters %}
+                <div class="row">
+                    {% set seen_subjects = [] %}
+                    {% for chapter in chapters %}
+                        {% for subject in subjects %}
+                            {% if subject.s_id == chapter.s_id and subject.s_id not in seen_subjects %}
+                                {% set _ = seen_subjects.append(subject.s_id) %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">
+                                                <a href="/edit_subject/{{ subject.s_id }}/{{ name }}">{{ subject.sname }}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Chapter Name</th>
+                                                        <th>Description</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for c in chapters if c.s_id == subject.s_id %}
+                                                        <tr>
+                                                            <td>{{ c.cname }}</td>
+                                                            <td>{{ c.c_description }}</td>
+                                                            <td>
+                                                                <a href="/edit_chapter/{{ c.c_id }}/{{ name }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <a href="/chapter/{{ subject.s_id }}/{{ name }}" class="btn btn-outline-primary">Add Chapter</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if not users and not subjects and not chapters and not quizzes and not questions %}
+                <p class="text-center">No results found.</p>
+            {% endif %}
+
+        {% else %}
+            <p class="text-center">Hi, here are the available Subjects</p>
+            <div class="row">
+                {% for subject in subjects %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <a href="/edit_subject/{{ subject.s_id }}/{{ name }}">{{ subject.sname }}</a>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Chapter Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for chapter in chapters if chapter.s_id == subject.s_id %}
+                                    <tr>
+                                        <td>{{ chapter.cname }}</td>
+                                        <td>{{ chapter.c_description }}</td>
+                                        <td>
+                                            <a href="/edit_chapter/{{ chapter.c_id }}/{{ name }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/chapter/{{ subject.s_id }}/{{ name }}" class="btn btn-outline-primary">Add Chapter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if not subjects %}
+                <p class="text-center">No Subjects available at the moment.</p>
+            {% endif %}
+
+            <div class="text-center mt-4">
+                <a href="/subject/{{ name }}" class="btn btn-outline-primary">Add Subjects</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

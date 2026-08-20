@@ -1,0 +1,25 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Add New Subject</h3></div>
+<p class="text-center">Hi, here you can add subjects</p>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="s_id" class="form-label">Subject ID</label>
+            <input type="number" class="form-control" id="s_id" name="s_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="sname" class="form-label">Subject Name</label>
+            <input type="text" class="form-control" id="sname" name="sname" placeholder="Web Development">
+        </div>
+        <div class="mb-3">
+            <label for="s_description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="s_description" name="s_description" placeholder="Web based app development">
+        </div>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Add Subject</button>
+            <a href="/admin/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}

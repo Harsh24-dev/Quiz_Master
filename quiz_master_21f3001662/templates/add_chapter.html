@@ -1,0 +1,29 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Add New Chapter</h3></div>
+<p class="text-center">Hi, here you can add Chapter</p>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="c_id" class="form-label">Chapter ID</label>
+            <input type="number" class="form-control" id="c_id" name="c_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="cname" class="form-label">Chapter Name</label>
+            <input type="text" class="form-control" id="cname" name="cname" placeholder="Introduction">
+        </div>
+        <div class="mb-3">
+            <label for="c_description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="c_description" name="c_description" placeholder="Brief introduction of chapter">
+        </div>
+        <div class="mb-3">
+            <label for="s_id" class="form-label">Subject ID</label>
+            <input type="number" class="form-control" id="s_id" name="s_id" placeholder="{{ s_id }}" disabled>
+        </div>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Add Chapter</button>
+            <a href="/admin/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}

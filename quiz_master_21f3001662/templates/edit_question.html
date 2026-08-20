@@ -1,0 +1,49 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class="center"><h3>Edit Question</h3></div>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="ques_id" class="form-label">Question ID</label>
+            <input type="number" class="form-control" id="ques_id" name="ques_id" value="{{ question.ques_id }}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="q_id" class="form-label">Quiz ID</label>
+            <input type="number" class="form-control" id="q_id" name="q_id" value="{{ question.q_id }}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="question_statement" class="form-label">Question Statement</label>
+            <input type="text" class="form-control" id="question_statement" name="question_statement" value="{{ question.question_statement }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="option1" class="form-label">Option 1</label>
+            <input type="text" class="form-control" id="option1" name="option1" value="{{ question.option1 }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="option2" class="form-label">Option 2</label>
+            <input type="text" class="form-control" id="option2" name="option2" value="{{ question.option2 }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="option3" class="form-label">Option 3</label>
+            <input type="text" class="form-control" id="option3" name="option3" value="{{ question.option3 }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="option4" class="form-label">Option 4</label>
+            <input type="text" class="form-control" id="option4" name="option4" value="{{ question.option4 }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="correct_option" class="form-label">Correct Option</label>
+            <select class="form-control" id="correct_option" name="correct_option">
+                <option value="option1" {% if question.correct_option == 'option1' %}selected{% endif %}>Option 1</option>
+                <option value="option2" {% if question.correct_option == 'option2' %}selected{% endif %}>Option 2</option>
+                <option value="option3" {% if question.correct_option == 'option3' %}selected{% endif %}>Option 3</option>
+                <option value="option4" {% if question.correct_option == 'option4' %}selected{% endif %}>Option 4</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/view_quiz/{{quiz.q_id}}/{{name}}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

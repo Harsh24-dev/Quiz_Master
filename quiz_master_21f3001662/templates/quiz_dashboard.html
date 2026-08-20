@@ -1,0 +1,42 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class="container">
+    <h3 class="text-center">Admin Quiz Dashboard</h3>
+    <div class="row">
+    {% for chapter in chapters %}
+    <div class = "row">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>{{ chapter.cname }}</h5>
+        </div>
+        <div class="card-body">
+            {% if chapter.quizzes %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Quiz ID</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in chapter.quizzes %}
+                    <tr>
+                        <td><a href="/edit_quiz/{{quiz.q_id}}/{{name}}"> {{ quiz.q_id }}</a></td>
+                        <td>{{ quiz.q_deadline.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td><a href="/view_quiz/{{quiz.q_id}}/{{name}}" class="btn btn-sm btn-primary">View Quiz</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No quizzes available for this chapter.</p>
+            {% endif %}
+            <div class="text-end"><a href="/add_quiz/{{chapter.c_id}}/{{name}}" class="btn btn-sm btn-success">Add Quiz</a></div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

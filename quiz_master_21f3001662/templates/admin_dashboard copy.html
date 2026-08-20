@@ -1,0 +1,93 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    {% if query %}
+        <h3 class="text-center">Search Result for {{ query }}</h3>
+        {% if users %}
+            <h4>Users</h4>
+            <ul>
+                {% for user in users %}
+                    <li>{{ user.name }} ({{ user.full_name }})</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if subjects %}
+            <h4>Subjects</h4>
+            <ul>
+                {% for subject in subjects %}
+                    <li><a href="/edit_subject/{{ subject.s_id }}/{{name}}">{{ subject.sname }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if quizzes %}
+            <h4>Quizzes</h4>
+            <ul>
+                {% for quiz in quizzes %}
+                    <li><a href="/edit_quiz/{{ quiz.q_id }}/{{name}}">{{ quiz.quiz_name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if questions %}
+            <h4>Questions</h4>
+            <ul>
+                {% for question in questions %}
+                    <li>{{ question.question_text }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if not users and not subjects and not quizzes and not questions %}
+            <p>No results found.</p>
+        {% endif %}
+
+    {% else %}
+        {% if subjects %}
+            <p class="text-center">Hi, here are available Subjects</p>
+            <div class="row">
+                {% for subject in subjects %}
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <a href="/edit_subject/{{ subject.s_id }}/{{ name }}"> {{ subject.sname }}</a>
+                        </h5>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Chapter Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for chapter in chapters %}
+                                    {% if chapter.s_id == subject.s_id %}
+                                    <tr>
+                                        <td>{{ chapter.cname }}</td>
+                                        <td>{{ chapter.c_description }}</td>
+                                        <td><a href="/edit_chapter/{{ chapter.c_id }}/{{ name }}" class="btn btn-outline-primary">Edit</a></td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/chapter/{{ subject.s_id }}/{{ name }}" type="button" class="btn btn-outline-primary">Add Chapters</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">No Subjects available at the moment.</p>
+        {% endif %}
+
+        <div class="center">
+            <a href="/subject/{{ name }}" type="button" class="btn btn-outline-primary">Add Subjects</a>
+        </div>
+
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "student_layout.html" %}
+{% block content %}
+<div class="center"><h3>View Quiz Answer</h3></div>
+{% for question in quiz.questions %}
+<div class = "card">
+    <div class="card-body">
+        <h5>Q{{loop.index}}: {{ question.question_statement }}</h5>
+        <div class="form-check">
+            <label class="form-check-label" for="q{{ question.ques_id }}_1">
+                A) {{ question.option1 }}
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="q{{ question.ques_id }}_1">
+                B) {{ question.option2 }}
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="q{{ question.ques_id }}_1">
+                C) {{ question.option3 }}
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="q{{ question.ques_id }}_1">
+                D) {{ question.option4 }}
+            </label>
+        </div>
+        <div class="form-check">
+            <p><strong>Correct Answer:</strong> {{ question.correct_option }}</p>
+        </div>    
+    </div>
+</div>
+{% endfor %}
+<div class="center">
+    <a href="/user/{{name}}" class="btn btn-outline-primary">Home</a>
+    <a href="/score_dashboard/{{name}}" class="btn btn-outline-secondary">Score History</a>
+</div>
+{% endblock %}

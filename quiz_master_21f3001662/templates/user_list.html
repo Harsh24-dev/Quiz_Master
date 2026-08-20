@@ -1,0 +1,24 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+<div class = "container">
+    <div class = "center"><h2>List of Registered Users</h2></div>
+    <table class = "table table-bordered">
+        <thead>
+            <tr>
+                <th>Username ID</th>
+                <th>Full Name</th>
+                <th>Qualification</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.qualification }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

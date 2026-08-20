@@ -1,0 +1,44 @@
+*{
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;;
+}
+
+.my_container{
+    border:2px solid black;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;;
+}
+
+.my_panel{
+    max-width: auto;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.input_form{
+    border: 1px solid black;
+    width: auto;
+    padding: 10px;
+    font-size: 16px;
+    text-align: justify;
+    border-radius: 6px;
+}
+
+.center{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.err_msg{
+    text-align: center;
+    margin: auto;
+    color: maroon;
+    font-weight: bold;
+}

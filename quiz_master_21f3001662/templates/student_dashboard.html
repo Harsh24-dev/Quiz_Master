@@ -1,0 +1,143 @@
+{% extends "student_layout.html" %}
+{% block content %}
+<div class="container">
+    {% if query %}
+        <h3 class="text-center">Search Results for "{{ query }}"</h3>
+
+        {% if subjects %}
+            <h4>Subjects</h4>
+            <div class="row">
+                {% for subject in subjects %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ subject.sname }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Quiz ID</th>
+                                            <th>Chapter Name</th>
+                                            <th>Deadline</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for chapter in subject.chapters %}
+                                        {% for quiz in chapter.quizzes %}
+                                        {% if quiz.q_deadline >= dt_time_now%}
+                                        <tr>
+                                            <td>{{ quiz.q_id }}</td>
+                                            <td>{{ chapter.cname }}</td>
+                                            <td>{{ quiz.q_deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+                                            <td><a href="/take_quiz/{{ quiz.q_id }}/{{ name }}" class="btn btn-primary">Take Quiz</a></td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if chapters %}
+            <h4>Chapters</h4>
+            <div class="row">
+                {% for chapter in chapters %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ chapter.cname }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Subject: {{ chapter.subject.sname }}, search with subject name and take quiz.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if quizzes %}
+            <h4>Quizzes</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Quiz ID</th>
+                        <th>Chapter Name</th>
+                        <th>Deadline</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes %}
+                    {% if quiz.q_deadline >= dt_time_now%}
+                        <tr>
+                            <td>{{ quiz.q_id }}</td>
+                            <td>{{ quiz.chapter.cname }}</td>
+                            <td>{{ quiz.q_deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                <a href="/take_quiz/{{ quiz.q_id }}/{{ name }}" class="btn btn-primary">Take Quiz</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        {% if not subjects and not chapters and not quizzes %}
+            <p class="text-center">No results found.</p>
+        {% endif %}
+
+    {% else %}
+        <h3 class="text-center">Available Quizzes</h3>
+        <p class="text-center">Ready to test your knowledge? Choose a quiz and start your challenge.</p>
+
+        {% if subjects %}
+            {% for subject in subjects %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ subject.sname }}</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if quizzes %}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Quiz ID</th>
+                                    <th>Chapter Name</th>
+                                    <th>Deadline</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for chapter in subject.chapters %}
+                                    {% for quiz in chapter.quizzes %}
+                                    {% if quiz.q_deadline >= dt_time_now%}
+                                        <tr>
+                                            <td>{{ quiz.q_id }}</td>
+                                            <td>{{ chapter.cname }}</td>
+                                            <td>{{ quiz.q_deadline.strftime('%Y-%m-%d %H:%M') }}</td>
+                                            <td><a href="/take_quiz/{{ quiz.q_id }}/{{ name }}" class="btn btn-primary">Take Quiz</a></td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">No subjects or quizzes available at the moment.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

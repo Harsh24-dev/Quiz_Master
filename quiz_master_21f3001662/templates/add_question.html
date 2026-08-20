@@ -1,0 +1,48 @@
+{%extends "admin_layout.html"%}
+{%block content%}
+<div class="center"><h3>Add New Question to Quiz</h3></div>
+<form action="#" method="POST">
+    <div class="input_form">
+        <div class="mb-3">
+            <label for="ques_id" class="form-label">Question ID</label>
+            <input type="number" class="form-control" id="ques_id" name="ques_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="q_id" class="form-label">Quiz ID</label>
+            <input type="number" class="form-control" id="q_id" name="q_id" placeholder="This will be filled automaticaly" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="question_statement" class="form-label">Question Statement</label>
+            <input type="text" class="form-control" id="question_statement" name="question_statement" placeholder="Here you can write Statement">
+        </div>
+        <div class="mb-3">
+            <label for="option1" class="form-label">First Option</label>
+            <input type="text" class="form-control" id="option1" name="option1" placeholder="First option">
+        </div>
+        <div class="mb-3">
+            <label for="option2" class="form-label">Second Option</label>
+            <input type="text" class="form-control" id="option2" name="option2" placeholder="Second option">
+        </div>
+        <div class="mb-3">
+            <label for="option3" class="form-label">Third Option</label>
+            <input type="text" class="form-control" id="option3" name="option3" placeholder="Third option">
+        </div>
+        <div class="mb-3">
+            <label for="option4" class="form-label">Fourth Option</label>
+            <input type="text" class="form-control" id="option4" name="option4" placeholder="Fourth option">
+        </div>
+        <div class="mb-3">
+            <label for="correct_option" class="form-label">Correct Option</label>
+            <select name="correct_option" id="correct_option"  class="form-select">
+                <option value="option1">First Option</option>
+                <option value="option2">Second Option</option>
+                <option value="option3">Third Option</option>
+                <option value="option4">Fourth Option</option>
+            </select>
+        <div class=mb-3>
+            <button type="submit" class="btn btn-primary">Add Question</button>
+            <a href="/view_quiz/{{q_id}}/{{name}}" type = "button" class ="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
+{%endblock%}
